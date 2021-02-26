@@ -1,11 +1,13 @@
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import Home from './containers/Home';
+import Login from './containers/Login';
 import ScrollToTop from './utils/ScrollToTop';
 
 export enum AuthRoutes {}
 
 export enum PublicRoutes {
   home = '/',
+  login = '/login',
 }
 
 const routes: React.FC = () => {
@@ -14,6 +16,7 @@ const routes: React.FC = () => {
       <ScrollToTop />
       <Switch>
         <Route exact path={PublicRoutes.home} component={Home} />
+        <Route exact path={PublicRoutes.login} component={Login} />
       </Switch>
     </BrowserRouter>
   );

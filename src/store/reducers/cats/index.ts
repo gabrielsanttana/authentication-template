@@ -74,16 +74,19 @@ export const INITIAL_STATE: CatsState = fromJS({
 const catFactsSelector = (state: ImmutableMap<ApplicationState>) =>
   state.get('cats');
 
-export const getCatFacts = createSelector(catFactsSelector, (catFacts) =>
-  catFacts.get('data'),
+export const getCatFacts = createSelector(
+  catFactsSelector,
+  (catFacts): ImmutableMap<CatFact> => catFacts.get('data'),
 );
 
-export const getCatFactsCount = createSelector(catFactsSelector, (catFacts) =>
-  catFacts.get('dataCount'),
+export const getCatFactsCount = createSelector(
+  catFactsSelector,
+  (catFacts): number => catFacts.get('dataCount'),
 );
 
-export const isLoadingCatFacts = createSelector(catFactsSelector, (catFacts) =>
-  catFacts.get('loading'),
+export const isLoadingCatFacts = createSelector(
+  catFactsSelector,
+  (catFacts): boolean => catFacts.get('loading'),
 );
 
 //Reducer

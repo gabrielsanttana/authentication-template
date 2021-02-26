@@ -8,5 +8,5 @@ interface ImmutableMap<T> extends Map<string, any> {
   getIn<K1 extends keyof T, K2 extends keyof T[K1]>(path: [K1, K2]): T[K1][K2];
   getIn<K1 extends keyof T>(path: [K1]): T[K1];
   getIn(keyPath: any[], notSetValue?: any): any;
-  toJS(): {};
+  toJS(): T;
 }
