@@ -65,7 +65,7 @@ const AuthRoute: React.FC<AuthRouteProps> = ({
 };
 
 export default connect((state: ApplicationState) => ({
-  isAuthed: true,
-  isStaff: true,
-  isAdmin: true,
+  isAuthed: state.getIn(['authentication', 'data', 'is_authenticated']),
+  isStaff: state.getIn(['authentication', 'data', 'user', 'is_staff']),
+  isAdmin: state.getIn(['authentication', 'data', 'user', 'is_admin']),
 }))(AuthRoute);

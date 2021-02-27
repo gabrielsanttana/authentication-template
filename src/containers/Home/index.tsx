@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
+import {logoutUserRequest} from '../../store/reducers/authentication';
 import {
   CatFact,
   fetchCatFactsRequest,
@@ -7,9 +8,11 @@ import {
   isLoadingCatFacts,
 } from '../../store/reducers/cats';
 import {ApplicationState} from '../../store/reducers/rootReducer';
+import styles from './Home.module.scss';
 
 interface DispatchProps {
   fetchCatFactsRequest: typeof fetchCatFactsRequest;
+  logoutUserRequest: typeof logoutUserRequest;
 }
 
 interface StateProps {
@@ -23,6 +26,7 @@ const Home: React.FC<HomeProps> = ({
   fetchCatFactsRequest,
   catFacts,
   isLoadingCatFacts,
+  logoutUserRequest,
 }) => {
   useEffect(() => {
     fetchCatFactsRequest({
@@ -32,7 +36,11 @@ const Home: React.FC<HomeProps> = ({
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
+      <header>
+        <button onClick={logoutUserRequest}>Log out</button>
+      </header>
+
       <h1>Home</h1>
 
       <p>
@@ -51,5 +59,6 @@ export default connect(
   },
   {
     fetchCatFactsRequest,
+    logoutUserRequest,
   },
 )(Home);

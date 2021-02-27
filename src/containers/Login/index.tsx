@@ -1,16 +1,39 @@
-import React, {FormEvent} from 'react';
+import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {connect} from 'react-redux';
 import {ApplicationState} from '../../store/reducers/rootReducer';
 import {Redirect} from 'react-router-dom';
 import styles from './Login.module.scss';
+import {loginUserRequest} from '../../store/reducers/authentication';
+
+interface DispatchProps {
+  loginUserRequest: typeof loginUserRequest;
+}
 
 interface StateProps {
   isAuthed: boolean;
 }
 
-const Login: React.FC<StateProps> = ({isAuthed}) => {
+const Login: React.FC<StateProps & DispatchProps> = ({
+  isAuthed,
+  loginUserRequest,
+}) => {
+  const [loginFormData, setLoginFormData] = useState({
+    username: '',
+    password: '',
+    nextRoute: '/',
+  });
+
   const loginUser = (event: FormEvent) => {
     event.preventDefault();
+
+    // loginUserRequest(loginFormData);
+    console.log(loginFormData);
+  };
+
+  const handleFormChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = event.target;
+
+    setLoginFormData({...loginFormData, [name]: value});
   };
 
   if (isAuthed) {
@@ -20,8 +43,19 @@ const Login: React.FC<StateProps> = ({isAuthed}) => {
   return (
     <div className={styles.container}>
       <form onSubmit={loginUser}>
-        <input type="email" autoFocus placeholder="Enter your email" />
-        <input type="password" placeholder="Enter your password" />
+        <input
+          name="username"
+          type="email"
+          autoFocus
+          placeholder="Enter your email"
+          onChange={handleFormChange}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Enter your password"
+          onChange={handleFormChange}
+        />
 
         <button type="submit">Log in</button>
       </form>
@@ -29,6 +63,11 @@ const Login: React.FC<StateProps> = ({isAuthed}) => {
   );
 };
 
-export default connect((state: ApplicationState) => ({
-  isAuthed: true,
-}))(Login);
+export default connect(
+  (state: ApplicationState) => ({
+    isAuthed: state.getIn(['authentication', 'data', 'is_authenticated']),
+  }),
+  {
+    loginUserRequest,
+  },
+)(Login);
