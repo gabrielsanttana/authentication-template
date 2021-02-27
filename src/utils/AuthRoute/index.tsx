@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Route, RouteComponentProps} from 'react-router';
 import {Redirect} from 'react-router-dom';
 import {PublicRoutes} from '../../routes';
+import {isAdmin, isAuthed, isStaff} from '../../store/reducers/authentication';
 import {ApplicationState} from '../../store/reducers/rootReducer';
 
 export type UserRoles = 'admin' | 'staff' | 'nonAdmin';
@@ -65,7 +66,7 @@ const AuthRoute: React.FC<AuthRouteProps> = ({
 };
 
 export default connect((state: ApplicationState) => ({
-  isAuthed: state.getIn(['authentication', 'data', 'is_authenticated']),
-  isStaff: state.getIn(['authentication', 'data', 'user', 'is_staff']),
-  isAdmin: state.getIn(['authentication', 'data', 'user', 'is_admin']),
+  isAuthed: isAuthed(state),
+  isStaff: isStaff(state),
+  isAdmin: isAdmin(state),
 }))(AuthRoute);

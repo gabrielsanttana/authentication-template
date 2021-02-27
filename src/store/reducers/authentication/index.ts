@@ -110,9 +110,27 @@ export const INITIAL_STATE: AuthenticationState = fromJS({
 const authenticationSelector = (state: ApplicationState) =>
   state.get('authentication');
 
+export const isAuthed = createSelector(
+  authenticationSelector,
+  (authentication): boolean =>
+    authentication.getIn(['data', 'is_authenticated']),
+);
+
+export const isAdmin = createSelector(
+  authenticationSelector,
+  (authentication): boolean =>
+    authentication.getIn(['data', 'user', 'is_admin']),
+);
+
+export const isStaff = createSelector(
+  authenticationSelector,
+  (authentication): boolean =>
+    authentication.getIn(['data', 'user', 'is_staff']),
+);
+
 export const getAuthenticationError = createSelector(
   authenticationSelector,
-  (authentication) => authentication.get('error'),
+  (authentication): boolean => authentication.get('error'),
 );
 
 //Reducer

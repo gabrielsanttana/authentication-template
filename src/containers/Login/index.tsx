@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {ApplicationState} from '../../store/reducers/rootReducer';
 import {Redirect} from 'react-router-dom';
 import styles from './Login.module.scss';
-import {loginUserRequest} from '../../store/reducers/authentication';
+import {isAuthed, loginUserRequest} from '../../store/reducers/authentication';
 
 interface DispatchProps {
   loginUserRequest: typeof loginUserRequest;
@@ -68,7 +68,7 @@ const Login: React.FC<StateProps & DispatchProps> = ({
 
 export default connect(
   (state: ApplicationState) => ({
-    isAuthed: state.getIn(['authentication', 'data', 'is_authenticated']),
+    isAuthed: isAuthed(state),
   }),
   {
     loginUserRequest,

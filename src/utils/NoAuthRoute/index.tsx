@@ -1,9 +1,11 @@
+import {is} from 'immutable';
 import React from 'react';
 import {connect} from 'react-redux';
 import {RouteProps} from 'react-router';
 import {Redirect, Route, RouteComponentProps} from 'react-router-dom';
 import NotFound from '../../containers/NotFound';
 import {AuthRoutes, PublicRoutes} from '../../routes';
+import {isAdmin, isAuthed, isStaff} from '../../store/reducers/authentication';
 import {ApplicationState} from '../../store/reducers/rootReducer';
 
 interface StateProps {
@@ -65,7 +67,7 @@ const NoAuthRoute: React.FC<StateProps & OwnProps> = ({
 };
 
 export default connect((state: ApplicationState) => ({
-  isAuthed: state.getIn(['authentication', 'data', 'is_authenticated']),
-  isStaff: state.getIn(['authentication', 'data', 'user', 'is_staff']),
-  isAdmin: state.getIn(['authentication', 'data', 'user', 'is_superuser']),
+  isAuthed: isAuthed(state),
+  isStaff: isStaff(state),
+  isAdmin: isAdmin(state),
 }))(NoAuthRoute);
