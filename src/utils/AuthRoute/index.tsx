@@ -15,7 +15,7 @@ interface StateProps {
 }
 
 interface OwnProps {
-  Component: React.FC<any>;
+  component: React.FC<any>;
   path: string;
   exact?: boolean;
   requiredRoles?: UserRoles[];
@@ -24,7 +24,7 @@ interface OwnProps {
 type AuthRouteProps = OwnProps & StateProps;
 
 const AuthRoute: React.FC<AuthRouteProps> = ({
-  Component,
+  component: Component,
   path,
   exact = false,
   requiredRoles,

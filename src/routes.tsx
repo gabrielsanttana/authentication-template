@@ -21,10 +21,12 @@ const routes = (
   <>
     <ScrollToTop />
     <Switch>
-      <AuthRoute exact path={AuthRoutes.home} Component={Home} />
+      <AuthRoute exact path={AuthRoutes.home} component={Home} />
+
       <Route exact path={PublicRoutes.login} component={Login} />
       <Route path={PublicRoutes.unauthorized} component={Unauthorized} />
       <Route path={PublicRoutes.notFound} component={NotFound} />
+
       <NoAuthRoute />
     </Switch>
   </>
