@@ -1,4 +1,4 @@
-import {fromJS, List, Map} from 'immutable';
+import {fromJS, Map} from 'immutable';
 import {AnyAction, Reducer} from 'redux';
 import {call, put} from 'redux-saga/effects';
 import {createSelector} from 'reselect';
