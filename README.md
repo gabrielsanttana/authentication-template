@@ -3,7 +3,7 @@
   <img src="./.github/redux.png" alt="react-authentication-boilerplate" width="100" style="margin: 0 0 10px 10px" />
 </div>
 
-<p align="center">🔐 An authentication boilerplate for React projects with public and authenticated routes set up</p>
+<p align="center" style="margin-top: 20px">🔐 An authentication boilerplate for React projects with public and auth routes set up</p>
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/gabrielsanttana/react-authentication-boilerplate/blob/master/LICENSE) 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/gabrielsanttana/react-authentication-boilerplate/blob/main/CONTRIBUTING.md)
