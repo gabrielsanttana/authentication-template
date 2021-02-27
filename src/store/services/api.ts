@@ -41,7 +41,7 @@ const applicationFetch: AxiosInstance = axios.create({
     'x-csrftoken': getCookie('csrftoken'),
     'Content-Type': 'application/json',
   },
-  withCredentials: true,
+  withCredentials: false,
 });
 
 const defaultOptions: FetchOptions = {method: 'get'};
