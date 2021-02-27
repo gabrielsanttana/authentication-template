@@ -3,12 +3,14 @@ import Home from './containers/Home';
 import Login from './containers/Login';
 import ScrollToTop from './utils/ScrollToTop';
 
-export enum AuthRoutes {}
-
 export enum PublicRoutes {
   home = '/',
   login = '/login',
+  notFound = 'not-found',
+  unauthorized = 'unauthorized',
 }
+
+export enum AuthRoutes {}
 
 const routes: React.FC = () => {
   return (
