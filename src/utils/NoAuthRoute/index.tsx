@@ -36,7 +36,7 @@ const NoAuthRoute: React.FC<StateProps & OwnProps> = ({
   return (
     <Route
       exact={exact}
-      render={(props: RouteComponentProps) => {
+      render={() => {
         if (renderPageNotFound) return <NotFound />;
 
         if (isUnauthorized)

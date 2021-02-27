@@ -22,6 +22,7 @@ export const saveState = (state: any) => {
       selectedSlices.includes(k),
     );
     const serializedState = JSON.stringify(selectedState.toJS());
+
     localStorage.setItem('applicationState', serializedState);
   } catch (err) {
     // Ignore write errors

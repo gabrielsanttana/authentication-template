@@ -51,12 +51,10 @@ const Home: React.FC<HomeProps> = ({
 };
 
 export default connect(
-  (state: ImmutableMap<ApplicationState>) => {
-    return {
-      catFacts: getCatFacts(state),
-      isLoadingCatFacts: isLoadingCatFacts(state),
-    };
-  },
+  (state: ImmutableMap<ApplicationState>) => ({
+    catFacts: getCatFacts(state),
+    isLoadingCatFacts: isLoadingCatFacts(state),
+  }),
   {
     fetchCatFactsRequest,
     logoutUserRequest,

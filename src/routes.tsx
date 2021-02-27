@@ -23,6 +23,10 @@ const routes = (
   <>
     <ScrollToTop />
     <Switch>
+      <Route path={PublicRoutes.login} component={Login} />
+      <Route path={PublicRoutes.unauthorized} component={Unauthorized} />
+      <Route path={PublicRoutes.notFound} component={NotFound} />
+
       <AuthRoute exact path={AuthRoutes.home} component={Home} />
       <AuthRoute
         exact
@@ -30,10 +34,6 @@ const routes = (
         component={Restricted}
         requiredRoles={['admin']}
       />
-
-      <Route path={PublicRoutes.login} component={Login} />
-      <Route path={PublicRoutes.unauthorized} component={Unauthorized} />
-      <Route path={PublicRoutes.notFound} component={NotFound} />
 
       <NoAuthRoute />
       {/* <Route component={NotFound} /> */}
