@@ -26,8 +26,7 @@ const Login: React.FC<StateProps & DispatchProps> = ({
   const loginUser = (event: FormEvent) => {
     event.preventDefault();
 
-    // loginUserRequest(loginFormData);
-    console.log(loginFormData);
+    loginUserRequest(loginFormData);
   };
 
   const handleFormChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -43,18 +42,22 @@ const Login: React.FC<StateProps & DispatchProps> = ({
   return (
     <div className={styles.container}>
       <form onSubmit={loginUser}>
+        <legend>Authentication</legend>
+
         <input
           name="username"
           type="email"
           autoFocus
           placeholder="Enter your email"
           onChange={handleFormChange}
+          value={loginFormData.username}
         />
         <input
           name="password"
           type="password"
           placeholder="Enter your password"
           onChange={handleFormChange}
+          value={loginFormData.password}
         />
 
         <button type="submit">Log in</button>

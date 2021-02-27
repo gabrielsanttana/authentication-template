@@ -25,7 +25,7 @@ export enum AuthenticationTypes {
 //Data types
 export interface Login {
   is_authenticated: boolean;
-  user: string;
+  user: any;
   user_roles: string[];
 }
 
@@ -60,13 +60,27 @@ export const logoutFailure = () => action(AuthenticationTypes.LOGOUT_FAILURE);
 //Sagas
 export function* loginUser(action: AnyAction) {
   try {
-    const response = yield call(loginService, action.payload.data);
+    // const response = yield call(loginService, action.payload.data);
 
     yield call(setCookie, {
       name: 'csrftoken',
-      value: response.data.token,
+      value: 'someJWT',
     });
-    yield put(loginSuccess(response.data));
+    yield put(
+      loginSuccess({
+        is_authenticated: true,
+        user: {
+          username: 'theuser',
+          email: 'theuser@gmail.com',
+          id: 1,
+          is_admin: true,
+          is_superuser: true,
+          first_name: 'The',
+          last_name: 'User',
+        },
+        user_roles: ['admin'],
+      }),
+    );
     yield put(push(action.payload.nextRoute));
   } catch (err) {
     yield put(loginFailure());
@@ -127,7 +141,9 @@ const reducer: Reducer<AuthenticationState> = (
       );
 
     case AuthenticationTypes.LOGOUT_REQUEST:
-      return state.withMutations((prevState) => prevState.set('loading', true));
+      return state.withMutations((prevState) =>
+        prevState.set('loading', true).set('error', false),
+      );
 
     case AuthenticationTypes.LOGOUT_SUCCESS:
       return state.withMutations((prevState) =>
