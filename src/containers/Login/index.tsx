@@ -1,14 +1,25 @@
 import React, {FormEvent} from 'react';
+import {connect} from 'react-redux';
+import {ApplicationState} from '../../store/reducers/rootReducer';
+import {Redirect} from 'react-router-dom';
 import styles from './Login.module.scss';
 
-const Login: React.FC = () => {
-  const login = (event: FormEvent) => {
+interface StateProps {
+  isAuthed: boolean;
+}
+
+const Login: React.FC<StateProps> = ({isAuthed}) => {
+  const loginUser = (event: FormEvent) => {
     event.preventDefault();
   };
 
+  if (isAuthed) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <div className={styles.container}>
-      <form onSubmit={login}>
+      <form onSubmit={loginUser}>
         <input type="email" autoFocus placeholder="Enter your email" />
         <input type="password" placeholder="Enter your password" />
 
@@ -18,4 +29,6 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default connect((state: ApplicationState) => ({
+  isAuthed: true,
+}))(Login);
