@@ -1,7 +1,7 @@
 import './App.scss';
 import {History} from 'history';
 import {ConnectedRouter} from 'connected-react-router/immutable';
-import Routes from './routes';
+import routes from './routes';
 
 interface AppProps {
   history: History;
@@ -10,7 +10,7 @@ interface AppProps {
 const App: React.FC<AppProps> = ({history}) => {
   return (
     <ConnectedRouter history={history} noInitialPop>
-      {Routes}
+      {routes}
     </ConnectedRouter>
   );
 };
