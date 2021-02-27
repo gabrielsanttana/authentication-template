@@ -36,7 +36,7 @@ const routes = (
       <Route path={PublicRoutes.notFound} component={NotFound} />
 
       <NoAuthRoute />
-      <Route component={NotFound} />
+      {/* <Route component={NotFound} /> */}
     </Switch>
   </>
 );

@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {RouteProps} from 'react-router';
 import {Redirect, Route, RouteComponentProps} from 'react-router-dom';
-import {PublicRoutes} from '../../routes';
+import NotFound from '../../containers/NotFound';
+import {AuthRoutes, PublicRoutes} from '../../routes';
 import {ApplicationState} from '../../store/reducers/rootReducer';
 
 interface StateProps {
@@ -28,20 +29,15 @@ const NoAuthRoute: React.FC<StateProps & OwnProps> = ({
   const userRole = isAdmin ? 'admin' : isStaff ? 'staff' : 'nonAdmin';
   const userHasRequiredRole = requiredRoles?.includes(userRole);
   const isUnauthorized = isAuthed && !userHasRequiredRole;
-  const renderPageNotFound = isAuthed;
+  const renderPageNotFound =
+    !Object.values(AuthRoutes).includes(location?.pathname as AuthRoutes) ||
+    !Object.values(PublicRoutes).includes(location?.pathname as PublicRoutes);
 
   return (
     <Route
       exact={exact}
       render={(props: RouteComponentProps) => {
-        if (renderPageNotFound)
-          return (
-            <Redirect
-              to={{
-                pathname: PublicRoutes.notFound,
-              }}
-            />
-          );
+        if (renderPageNotFound) return <NotFound />;
 
         if (isUnauthorized)
           return (
