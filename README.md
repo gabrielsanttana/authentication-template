@@ -40,8 +40,6 @@ $ git clone https://github.com/gabrielsanttana/react-authentication-boilerplate
 $ cd react-authentication-boilerplate
 $ npm install
 $ npm start
-
-# Then, you're ready to go and start adding new reducers, actions, and sagas to your project!
 ```
 
 ## 💁🏽 Contribute
